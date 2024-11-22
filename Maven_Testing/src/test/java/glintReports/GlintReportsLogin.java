@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class GlintReportsLogin {
@@ -13,7 +13,7 @@ public class GlintReportsLogin {
 	
 	public WebDriver driver;
 
-	@BeforeMethod
+	@BeforeClass
 	public void open() throws InterruptedException {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -29,47 +29,42 @@ public class GlintReportsLogin {
 		driver.findElement(By.xpath("/html/body/glint-session-root/div/glint-session-login/form/section/footer")).click();
 		Thread.sleep(30000);
 	}
+	@AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+	
+	@Test
+		public void TC_00() 	throws InterruptedException {
+			driver.findElement(By.linkText("Reports")).click();
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
+		
+		
+	}
+	@Test
+		public void TC_001() throws InterruptedException {            //new report>>select a repo type
+			driver.findElement(By.linkText("Reports")).click();
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//button[@class=\"btnCta btnWithVgIcon glintButton ng-star-inserted\"]")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//div[@class='menuButton text small glintButton']")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.id("option4")).click();
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//span[text()='Add Filters']")).click();
+			
+			
 
-	
-	@Test
-	public void TC_00() throws InterruptedException {
-		driver.findElement(By.linkText("Reports")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
-		
-		
-	}
-	@Test
-	public void TC_001() throws InterruptedException {            //new report>>select a repo type
-		driver.findElement(By.linkText("Reports")).click();
-		Thread.sleep(3000);
-		driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//button[@class=\"btnCta btnWithVgIcon glintButton ng-star-inserted\"]")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[@class='menuButton text small glintButton']")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.id("option4")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//span[text()='Add Filters']")).click();
-		
-		
-//		Thread.sleep(2000);
-//		driver.findElement(By.xpath("//div[@class='menuButton text small glintButton']")).click();
-//		Thread.sleep(2000);
-//		driver.findElement(By.id("option2")).click();
-//		Thread.sleep(1000);
-//		driver.findElement(By.xpath("//*[@class=\"inlineBtn glintButton\"]")).click();
-//		Thread.sleep(2000);
-//		driver.findElement(By.xpath("//*[@class='btnIcon slideyClose glintButton']")).click();
-//		Thread.sleep(2000);
-		
 	}
 	
 	@Test
-	public void TC_002() throws InterruptedException {            //add filters>>question responses
+	public void TC_03() throws InterruptedException  
+	{   //add filters>>question responses
 		driver.findElement(By.linkText("Reports")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@class='btnCta btnWithVgIcon glintButton ng-star-inserted']")).click();
@@ -103,9 +98,6 @@ public class GlintReportsLogin {
 		Thread.sleep(2000);
         driver.findElement(By.id("option2")).click();
 		driver.findElement(By.id("btnWithVgIcon subtleBtn glintButton ng-star-inserted")).click();
-		
-		
-		
 	}
 	
 	@Test
@@ -133,17 +125,17 @@ public class GlintReportsLogin {
 	
 	
 	public void TC_005() throws InterruptedException {    //export and share>> PDF
-	 driver.findElement(By.linkText("Reports")).click();
-	Thread.sleep(1000);
-	driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
-	Thread.sleep(2000);
-	driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
-	Thread.sleep(4000);
-	driver.findElement(By.xpath("//div[@aria-label=\"Report Export Options Menu\"]")).click();
-	Thread.sleep(1000);
-	driver.findElement(By.xpath("//li[@id=\"option1\"]")).click();
-	Thread.sleep(1000);
-	driver.findElement(By.xpath("//button[text()=' Generate PDF ']")).click();
+		driver.findElement(By.linkText("Reports")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
+		Thread.sleep(4000);
+		driver.findElement(By.xpath("//div[@aria-label=\"Report Export Options Menu\"]")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//li[@id=\"option1\"]")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//button[text()=' Generate PDF ']")).click();
 	}
 	
 	
@@ -164,21 +156,17 @@ public class GlintReportsLogin {
 	
 	@Test
 
-public void TC_007() throws InterruptedException {    //export and share>>report of power point
-driver.findElement(By.linkText("Reports")).click();
-Thread.sleep(1000);
-driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
-Thread.sleep(2000);
-driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
-Thread.sleep(4000);
-driver.findElement(By.xpath("//div[@aria-label=\"Report Export Options Menu\"]")).click();
-Thread.sleep(1000);
-driver.findElement(By.xpath("//li[@id=\"option0\"]")).click();
-Thread.sleep(1000);
-
-
-
-
+	public void TC_007() throws InterruptedException {    //export and share>>report of power point
+		driver.findElement(By.linkText("Reports")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
+		Thread.sleep(4000);
+		driver.findElement(By.xpath("//div[@aria-label=\"Report Export Options Menu\"]")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//li[@id=\"option0\"]")).click();
+		Thread.sleep(1000);
 	}
     
 	@Test
@@ -190,7 +178,6 @@ Thread.sleep(1000);
 		driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("(//button[text()=' View Report '])[1]")).click();
-		
 	}
     
 	@Test
@@ -209,17 +196,6 @@ Thread.sleep(1000);
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("(//i[@class=\"plus glintIcon\"])[2]")).click();
 	}
-
-
-
-
-
-	
-	
-//	@AfterMethod
-//	public void close(){
-//		driver.quit();
-//	}
 }
 	
 	
