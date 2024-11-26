@@ -7,27 +7,49 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pageobjetcs.Reportpageobjects;
+
+import java.util.concurrent.TimeUnit;
 
 public class GlintReportsLogin {
 	
 	
 	public WebDriver driver;
 
+	public Reportpageobjects report;
+
 	@BeforeClass
 	public void open() throws InterruptedException {
 		driver = new ChromeDriver();
+		report = new Reportpageobjects(driver);
 		driver.manage().window().maximize();
 		driver.get("https://app.vgqa.glint.cloud-dev.microsoft/session/auth");
-		Thread.sleep(3000);
-		driver.findElement(By.id("email")).sendKeys("qatester@glintinc.com");
-		driver.findElement(By.xpath("/html/body/glint-session-root/div/glint-session-auth/form/section/footer/button")).click();
-		Thread.sleep(3000);
-		driver.findElement(By.id("clientUuid")).sendKeys("qa20230121");
-		driver.findElement(By.xpath("/html/body/glint-session-root/div/glint-session-client/form/section/footer/button")).click();
-		Thread.sleep(3000);
-		driver.findElement(By.id("password")).sendKeys("Dem0@pass2");
-		driver.findElement(By.xpath("/html/body/glint-session-root/div/glint-session-login/form/section/footer")).click();
-		Thread.sleep(30000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		report.enteremail();
+//		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		report.clickcontinuebtn();
+//		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		report.enterclientbtn();
+//		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		report.clickcontinuebtn();
+//		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		report.enterpassword();
+//		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		report.clickcontinuebtn();
+//		driver.findElement(By.id("email")).sendKeys("qatester@glintinc.com");
+//		driver.findElement(By.xpath("/html/body/glint-session-root/div/glint-session-auth/form/section/footer/button")).click();
+//		Thread.sleep(3000);
+//		driver.findElement(By.id("clientUuid")).sendKeys("qa20230121");
+//		driver.findElement(By.xpath("/html/body/glint-session-root/div/glint-session-client/form/section/footer/button")).click();
+//		Thread.sleep(3000);
+//		driver.findElement(By.id("password")).sendKeys("Dem0@pass2");
+//		driver.findElement(By.xpath("/html/body/glint-session-root/div/glint-session-login/form/section/footer")).click();
+//		Thread.sleep(30000);
 	}
 	@AfterClass
     public void tearDown() {
@@ -35,18 +57,21 @@ public class GlintReportsLogin {
     }
 	
 	@Test
-		public void TC_00() 	throws InterruptedException {
-			driver.findElement(By.linkText("Reports")).click();
+		public void TC_00() throws InterruptedException {
+//			driver.findElement(By.linkText("Reports")).click();
+			report.clickreportheading();
 			Thread.sleep(1000);
-			driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
+//			driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
+			report.clickreport();
 			Thread.sleep(2000);
-			driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
-		
+//			driver.findElement(By.xpath("//div[contains(text(),'Response Rate Report')]")).click();
+			report.clickresponserate();
 		
 	}
 	@Test
 		public void TC_001() throws InterruptedException {            //new report>>select a repo type
-			driver.findElement(By.linkText("Reports")).click();
+//			driver.findElement(By.linkText("Reports")).click();
+			report.clickreportheading();
 			Thread.sleep(3000);
 			driver.findElement(By.xpath("//span[text()='Engagement test']")).click();
 			Thread.sleep(2000);
